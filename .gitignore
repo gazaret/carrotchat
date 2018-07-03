@@ -1,0 +1,16 @@
+# IDEs
+.vscode
+.idea
+
+# Other
+.DS_Store
+*.log
+
+# Python
+env/
+__pycache__/
+*.py[cod]
+*$py.class
+
+# JavaScript
+node_modules/
