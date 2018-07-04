@@ -1,9 +1,11 @@
 from django.conf.urls import include, url
-from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token
 
-from .views import AuthRegister
+from .views import (
+  AccountRegister,
+  AccountAuthorization
+)
 
 urlpatterns = [
-  url(r'^login/$', obtain_jwt_token),
-  url(r'^registration/$', AuthRegister.as_view())
+  url(r'^login/$', AccountAuthorization.as_view()),
+  url(r'^registration/$', AccountRegister.as_view())
 ]

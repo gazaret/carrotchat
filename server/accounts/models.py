@@ -33,5 +33,6 @@ class Account(AbstractBaseUser):
 
   objects = AccountManager()
 
+  USERNAME_FIELD = 'username'
   REQUIRED_FIELDS = ['username']
 

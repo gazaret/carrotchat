@@ -1,16 +1,16 @@
-from django.contrib.auth import update_session_auth_hash
 from rest_framework import serializers
 
 from .models import Account
 
-class AccountSerializer(serializers.ModelSerializer):
+class AccountRegistrationSerializer(serializers.ModelSerializer):
   password = serializers.CharField(write_only=True, required=True)
   confirm_password = serializers.CharField(write_only=True, required=True)
+  token = serializers.SerializerMethodField()
 
   class Meta:
     model = Account
     fields = (
-      'id', 'username', 'date_created', 'date_modified', 'password', 'confirm_password'
+      'id', 'username', 'token', 'date_created', 'date_modified', 'password', 'confirm_password'
     )
     read_only_fields = ('date_created', 'date_modified')
 
@@ -31,6 +31,6 @@ class AccountSerializer(serializers.ModelSerializer):
 
   def validate(self, data):
     if data['password'] != data['confirm_password']:
-      raise serializers.ValidationError('Пароли не должны совпадать')
+      raise serializers.ValidationError({'error': 'Пароли должны совпадать'})
 
     return data
