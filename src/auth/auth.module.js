@@ -1,12 +1,12 @@
-import { authState } from './auth.states';
-import authComponent from './auth.component';
+import { signInState } from './auth.states';
+import signInComponent from './components/signIn/signIn.component';
 
 let authModule = angular.module('AuthModule', []);
 
 authModule.config($stateProvider => {
-  $stateProvider.state(authState);
+  $stateProvider.state(signInState);
 });
 
-authModule.component('auth', authComponent);
+authModule.component('signIn', signInComponent);
 
 export default authModule = authModule.name;

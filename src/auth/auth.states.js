@@ -1,5 +1,5 @@
-export const authState = {
-  name: 'auth',
-  url: '/auth',
-  component: 'auth',
+export const signInState = {
+  name: 'signIn',
+  url: '/signIn',
+  component: 'signIn',
 };
