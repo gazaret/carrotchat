@@ -31,11 +31,13 @@ class AccountRegister(APIView):
       account = Account.objects.get(username=username)
       token = get_token(account)
 
-      return Response({
+      response = Response({
         'status': True,
         'username': username,
         'token': token,
-      }, status=status.HTTP_200_OK)
+      })
+      response.set_cookie('token', token)
+      return response
 
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -58,11 +60,13 @@ class AccountAuthorization(APIView):
     if account and is_correct_password:
       token = get_token(account)
 
-      return Response({
+      response = Response({
         'status': True,
         'username': username,
         'token': token,
-      }, status=status.HTTP_200_OK)
+      })
+      response.set_cookie('token', token)
+      return response
 
     return Response({
       'status': False,
