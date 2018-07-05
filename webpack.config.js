@@ -9,7 +9,6 @@ const distPath = path.join(__dirname, 'dist');
 
 module.exports = {
   entry: {
-    vendors: path.join(appPath, 'vendors.js'),
     app: path.join(appPath, 'app.js'),
   },
   output: {
@@ -79,14 +78,6 @@ module.exports = {
     splitChunks: {
       chunks: 'all',
     },
-    minimizer: [
-      new UglifyJsPlugin({
-        exclude: [
-          'vendors.js'
-        ],
-        sourceMap: true,
-      }),
-    ],
   },
   plugins: [
     new CleanWebpackPlugin('dist', {}),
@@ -97,7 +88,6 @@ module.exports = {
       filename: '[file].map',
       exclude: [
         'style.css',
-        'vendors.js',
       ]
     }),
     new webpack.LoaderOptionsPlugin({
