@@ -7,13 +7,12 @@ class AuthJWTMiddleware:
     self.inner = inner
 
   def __call__(self, scope):
-    headers = dict(scope['headers'])
+    query_string = scope['query_string']
     token = None
     user = None
 
-    if b'cookie' in headers:
-      print(headers[b'cookie'].decode())
-      token = headers[b'cookie'].decode()[6:]
+    if query_string:
+      token = query_string.decode()[6:]
 
     if token:
       try:
