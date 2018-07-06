@@ -1,6 +1,7 @@
 <div class="message">
   <div class="message__header">
     <p class="message__user">{{ $ctrl.message.username }}</p>
+    <p class="message__time">{{ $ctrl.message.created | date: "MM.dd 'в' HH:mm" }}</p>
   </div>
   <p class="message__body">{{ $ctrl.message.message }}</p>
 </div>
