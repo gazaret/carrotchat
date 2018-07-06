@@ -39,6 +39,7 @@
   "dependencies": {
     "@uirouter/angularjs": "^1.0.18",
     "angular": "^1.7.2",
+    "angular-jwt": "^0.1.10",
     "angular-ui-bootstrap": "^2.5.6"
   }
 }

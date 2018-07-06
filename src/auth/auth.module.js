@@ -1,12 +1,19 @@
-import { signInState } from './auth.states';
-import signInComponent from './components/signIn/signIn.component';
+import { signInState, signUpState } from './auth.states';
+import AuthService from './services/auth.service';
+import SignInComponent from './components/signIn/signIn.component';
+import SignUpComponent from './components/signUp/signUp.component';
 
-let authModule = angular.module('AuthModule', []);
 
-authModule.config($stateProvider => {
+let AuthModule = angular.module('AuthModule', []);
+
+AuthModule.config($stateProvider => {
   $stateProvider.state(signInState);
+  $stateProvider.state(signUpState);
 });
 
-authModule.component('signIn', signInComponent);
+AuthModule.service('AuthService', AuthService);
 
-export default authModule = authModule.name;
+AuthModule.component('signIn', SignInComponent);
+AuthModule.component('signUp', SignUpComponent);
+
+export default AuthModule = AuthModule.name;

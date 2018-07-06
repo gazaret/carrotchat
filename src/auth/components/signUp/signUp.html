@@ -1,0 +1,19 @@
+<div class="signUp">
+  <div class="signUp__card">
+      <div class="form-group">
+          <label for="username">Логин</label>
+          <input type="text" class="form-control" id="username" ng-model="$ctrl.username" placeholder="Введите логин">
+      </div>
+      <div class="form-group">
+          <label for="password">Пароль</label>
+          <input type="password" class="form-control" id="password" ng-model="$ctrl.password" placeholder="Введите пароль">
+      </div>
+      <div class="form-group">
+          <label for="confirmPassword">Подтверждение пароля</label>
+          <input type="password" class="form-control" id="confirmPassword" ng-model="$ctrl.confirmPassword" placeholder="Введите пароль еще раз">
+      </div>
+      <small class="signUp__errorMessage form-text">{{ $ctrl.errorMessage }}</small>
+      <button type="submit" class="btn btn-primary" ng-click="$ctrl.registration()">Зарегистрироваться</button>
+      <a class="signIn__link" ui-sref="signIn">Уже есть аккаунт?</a>
+  </div>
+</div>
