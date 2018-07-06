@@ -1,9 +1,11 @@
 import './signIn.scss';
 
 class SignInController {
-  constructor(AuthService, $scope) {
+  constructor(AuthService, $scope, $state) {
     this.AuthService = AuthService;
     this.$scope = $scope;
+    this.$state = $state;
+
     this.errorMessage = '';
   }
 
@@ -16,15 +18,18 @@ class SignInController {
       await this.AuthService.authenticate(this.username, this.password)
 
       this.errorMessage = '';
+
+      this.$state.go('chat');
     } catch (error) {
       this.errorMessage = error;
     }
 
     this.$scope.$apply();
+
   }
 }
 
 export default {
   controller: SignInController,
-  template: require('./signIn.html')
+  template: require('./signIn.html'),
 }

@@ -1,8 +1,9 @@
 export default class AuthService {
-  constructor($http, StorageService, jwtHelper, API_ENDPOINT) {
+  constructor($http, StorageService, jwtHelper, $state, API_ENDPOINT) {
     this.$http = $http;
     this.StorageService = StorageService;
     this.jwtHelper = jwtHelper;
+    this.$state = $state;
     this.API_ENDPOINT = API_ENDPOINT;
   }
 
@@ -33,9 +34,9 @@ export default class AuthService {
         return Promise.reject(response.data.message)
       }
 
-      return this.StorageService.set('token', response.data.token);
+      this._saveCredentials(response.data.username, response.data.token);
     } catch (error) {
-      return Promise.reject(error.data.message);
+      return this._errorHandler(error);
     }
   }
 
@@ -51,9 +52,31 @@ export default class AuthService {
         return Promise.reject(response.data.message)
       }
 
-      return this.StorageService.set('token', response.data.token);
+      this._saveCredentials(response.data.username, response.data.token);
     } catch (error) {
-      return Promise.reject(error.data.message);
+      return this._errorHandler(error);
     }
+  }
+
+  getToken() {
+    return this.StorageService.get('token');
+  }
+
+  logout() {
+    this.StorageService.clear();
+    this.$state.go('signIn');
+  }
+
+  _saveCredentials(username, token) {
+    this.StorageService.set('username', username);
+    this.StorageService.set('token', token);
+  }
+
+  _errorHandler(error) {
+    if (!error.data || !error.data.message) {
+      return Promise.reject('Ошибка сервера');
+    }
+
+    return Promise.reject(error.data.message);
   }
 }

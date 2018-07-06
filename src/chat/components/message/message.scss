@@ -1,0 +1,25 @@
+.message {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+
+  &__header {
+    display: flex
+  }
+
+  &__user {
+    color: #2c2d30;
+    font-family: 'Roboto';
+    font-weight: 900;
+    margin-bottom: 0;
+  }
+
+  &__body {
+    width: 100%;
+    color: #2c2d30;
+    font-family: 'Roboto';
+    font-size: 15px;
+    margin: 0;
+    word-wrap: break-word;
+  }
+}

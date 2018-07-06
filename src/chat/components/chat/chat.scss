@@ -1,0 +1,13 @@
+.chat {
+  height: 100%;
+  margin: 0;
+
+  &__sidePanel {
+    height: 100%;
+    background-color: #4d394b;
+  }
+
+  &__messagesContainer {
+    padding: 0;
+  }
+}

@@ -1,0 +1,8 @@
+<div class="messages">
+  <div class="messages__list">
+    <message message="message" ng-repeat="message in $ctrl.messages"></message>
+  </div>
+  <div class="messages__form">
+      <input type="text" class="form-control messages__input" placeholder="Введите сообщение" ng-model="$ctrl.message" ng-keypress="$ctrl.sendMessage($event)">
+  </div>
+</div>

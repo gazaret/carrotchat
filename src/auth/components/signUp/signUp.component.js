@@ -1,9 +1,10 @@
 import './signUp.scss';
 
 class SignUpController {
-  constructor(AuthService, $scope) {
+  constructor(AuthService, $scope, $state) {
     this.AuthService = AuthService;
     this.$scope = $scope;
+    this.$state = $state;
 
     this.errorMessage = '';
   }
@@ -17,6 +18,8 @@ class SignUpController {
       await this.AuthService.registration(this.username, this.password, this.confirmPassword);
 
       this.errorMessage = '';
+
+      this.$state.go('chat');
     } catch (error) {
       this.errorMessage = error;
     }
@@ -27,5 +30,5 @@ class SignUpController {
 
 export default {
   controller: SignUpController,
-  template: require('./signUp.html')
+  template: require('./signUp.html'),
 }
