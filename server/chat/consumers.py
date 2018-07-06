@@ -37,13 +37,16 @@ class ChatConsumer(WebsocketConsumer):
     model = Messages(account=self.account, message=message)
     model.save()
 
+    created = int(model.created.timestamp()) * 1000
+
     # Отправляем сообщение в группу
     async_to_sync(self.channel_layer.group_send)(
       self.room_group_name,
       {
         'type': 'chat_message',
         'message': message,
-        'username': self.username
+        'username': self.username,
+        'created': created
       }
     )
 
@@ -51,8 +54,10 @@ class ChatConsumer(WebsocketConsumer):
   def chat_message(self, event):
     message = event['message']
     username = event['username']
+    created = event['created']
 
     self.send(text_data=json.dumps({
       'message': message,
-      'username': username
+      'username': username,
+      'created': created,
     }))
