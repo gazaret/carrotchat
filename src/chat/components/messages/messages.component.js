@@ -3,12 +3,12 @@ import './messages.scss';
 class MessagesController {
   constructor(MessagesService, $scope, $rootScope) {
     this.MessagesService = MessagesService;
-
-    this.a = 'abc';
-    this.b = 'cba';
+    this.$scope = $scope;
 
     this.message = '';
     this.messages = [];
+
+    this.getMessagesHistory();
 
     $rootScope.$on('chat_message', (event, messageData) => {
       console.info('receive messge', messageData);
@@ -27,6 +27,16 @@ class MessagesController {
       this.MessagesService.sendMessage(this.message);
       this.message = '';
     }
+  }
+
+  async getMessagesHistory() {
+    try {
+      const prevMessages = await this.MessagesService.getMessagesHistory();
+
+      this.messages = this.messages.concat(prevMessages);
+
+      this.$scope.$apply();
+    } catch (error) {}
   }
 }
 

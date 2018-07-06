@@ -2,35 +2,35 @@ from rest_framework import serializers
 
 from .models import Account
 
-class AccountRegistrationSerializer(serializers.ModelSerializer):
-  password = serializers.CharField(write_only=True, required=True)
-  confirm_password = serializers.CharField(write_only=True, required=True)
-  token = serializers.SerializerMethodField()
 
-  class Meta:
-    model = Account
-    fields = (
-      'id', 'username', 'token', 'date_created', 'date_modified', 'password', 'confirm_password'
-    )
-    read_only_fields = ('date_created', 'date_modified')
+class AccountSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(write_only=True, required=True)
+    confirm_password = serializers.CharField(write_only=True, required=True)
 
-  def create(self, validated_data):
-    return Account.objects.create_user(**validated_data)
+    class Meta:
+        model = Account
+        fields = (
+            'id', 'username', 'date_created', 'date_modified', 'password', 'confirm_password'
+        )
+        read_only_fields = ('date_created', 'date_modified')
 
-  def update(self, instance, validated_data):
-    instance.username = validated_data.get('username', instance.username)
-    password = validated_data.get('password', None)
-    confirm_password = validated_data.get('confirm_password', None)
+    def create(self, validated_data):
+        return Account.objects.create_user(**validated_data)
 
-    if password and password == confirm_password:
-      instance.set_password(password)
+    def update(self, instance, validated_data):
+        instance.username = validated_data.get('username', instance.username)
+        password = validated_data.get('password', None)
+        confirm_password = validated_data.get('confirm_password', None)
 
-    instance.save()
+        if password and password == confirm_password:
+            instance.set_password(password)
 
-    return instance
+        instance.save()
 
-  def validate(self, data):
-    if data['password'] != data['confirm_password']:
-      raise serializers.ValidationError({'error': 'Пароли должны совпадать'})
+        return instance
 
-    return data
+    def validate(self, data):
+        if data['password'] != data['confirm_password']:
+            raise serializers.ValidationError({'error': 'Пароли должны совпадать'})
+
+        return data

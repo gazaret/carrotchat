@@ -130,6 +130,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+AUTH_USER_MODEL = "accounts.account"
+
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated'
@@ -141,10 +143,10 @@ REST_FRAMEWORK = {
 }
 
 JWT_AUTH = {
+    'JWT_SECRET_KEY': '#j=%*)^oknzb695_qpgth_9*e6729-wrqq_2=jb&tz^b^2_134',
     'JWT_ALLOW_REFRESH': False,
     'JWT_EXPIRATION_DELTA': datetime.timedelta(hours=24),
-    'JWT_AUTH_HEADER_PREFIX': 'Bearer',
-    'JWT_VERIFY': True
+    'JWT_AUTH_HEADER_PREFIX': 'Bearer'
 }
 
 CHANNEL_LAYERS = {
