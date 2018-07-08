@@ -1,12 +1,17 @@
 export default class AuthService {
-  constructor($http, StorageService, jwtHelper, $state, API_ENDPOINT) {
+  constructor($http, StorageService, jwtHelper, $state, $rootScope, API_ENDPOINT) {
     this.$http = $http;
     this.StorageService = StorageService;
     this.jwtHelper = jwtHelper;
     this.$state = $state;
+    this.$rootScope = $rootScope;
     this.API_ENDPOINT = API_ENDPOINT;
   }
 
+  /**
+   * Проверка, авторизован ли пользователь
+   * @returns {boolean}
+   */
   isAuthenticated() {
     const token = this.StorageService.get('token');
 
@@ -23,6 +28,12 @@ export default class AuthService {
     }
   }
 
+  /**
+   * Аунтификация пользователя
+   * @param username логин
+   * @param password пароль
+   * @returns {Promise<*>}
+   */
   async authenticate(username, password) {
     try {
       const response = await this.$http.post(`${this.API_ENDPOINT}/api/v1/auth/login/`, {
@@ -40,6 +51,13 @@ export default class AuthService {
     }
   }
 
+  /**
+   * Регистрация пользователя
+   * @param username логин
+   * @param password пароль
+   * @param confirmPassword подтверждение пароля
+   * @returns {Promise<*>}
+   */
   async registration(username, password, confirmPassword) {
     try {
       const response = await this.$http.post(`${this.API_ENDPOINT}/api/v1/auth/registration/`, {
@@ -58,11 +76,19 @@ export default class AuthService {
     }
   }
 
+  /**
+   * Получение токена пользователя
+   * @returns {*}
+   */
   getToken() {
     return this.StorageService.get('token');
   }
 
+  /**
+   * Выход из аккаунта пользователя
+   */
   logout() {
+    this.$rootScope.$emit('logout');
     this.StorageService.clear();
     this.$state.go('signIn');
   }

@@ -24,11 +24,14 @@
   }
 
   &__form {
+    display: flex;
+    flex-direction: column;
     margin: 20px 0;
     padding-right: 20px;
   }
 
   &__input {
+    order: 1;
     border-width: 0;
     border-radius: 2px;
     background-color: #fff;

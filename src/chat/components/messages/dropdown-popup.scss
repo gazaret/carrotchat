@@ -1,0 +1,10 @@
+.dropdown-popup {
+  display: flex;
+  margin-bottom: 5px;
+
+  &__menu {
+    display: flex;
+    padding-left: 10px;
+    position: static;
+  }
+}

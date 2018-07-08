@@ -16,10 +16,10 @@ ConfigModule.config($httpProvider => {
         return config;
       },
       responseError: (rejection) => {
-        // Logout при получении 403 ошибки
-        if (rejection.status === 403) {
-          StorageService.clear();
-          $state.go('signIn');
+        // Logout при получении 403 или 401 ошибки
+        if (rejection.status === 403 || rejection.status === 401) {
+          const AuthService = $injector.get('AuthService');
+          AuthService.logout();
         }
       },
     };

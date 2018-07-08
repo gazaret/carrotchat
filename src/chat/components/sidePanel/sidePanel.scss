@@ -1,0 +1,56 @@
+.sidePanel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: #4d394b;
+  justify-content: space-between;
+
+  &__user-block {
+    padding: 15px;
+
+    &--username {
+      font-family: 'Roboto';
+      font-size: 16px;
+      color: #fff;
+    }
+  }
+
+  &__channels {
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+
+    &--title {
+      padding: 0px 15px;
+      margin: 0;
+      font-family: 'Roboto';
+      font-size: 16px;
+      color: #fff;
+    }
+
+    &--item {
+      padding: 5px 15px;
+      font-family: 'Roboto';
+      font-size: 15px;
+      color: #fff;
+      background-color: #4C9689;
+    }
+  }
+
+  &__logout {
+    padding: 15px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #3e313c;
+    }
+
+    &--title {
+      font-family: 'Roboto';
+      font-size: 16px;
+      color: #fff;
+      margin: 0;
+    }
+
+  }
+}

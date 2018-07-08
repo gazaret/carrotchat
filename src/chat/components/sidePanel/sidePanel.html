@@ -1,0 +1,17 @@
+<div class="sidePanel">
+  <div>
+    <div class="sidePanel__user-block">
+      <p class="sidePanel__user-block--username">Привет, {{ $ctrl.username }}!</p>
+    </div>
+
+    <div class="sidePanel__channels">
+      <p class="sidePanel__channels--title">Каналы</p>
+
+      <p class="sidePanel__channels--item"># Общий</p>
+    </div>
+  </div>
+
+  <div class="sidePanel__logout" ng-click="$ctrl.logout()">
+    <p class="sidePanel__logout--title">Выход</p>
+  </div>
+</div>

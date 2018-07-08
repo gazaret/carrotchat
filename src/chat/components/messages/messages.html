@@ -5,6 +5,14 @@
       </div>
   </div>
   <div class="messages__form">
-      <input type="text" class="form-control messages__input" placeholder="Введите сообщение" ng-model="$ctrl.message" ng-keypress="$ctrl.sendMessage($event)">
+      <input
+        type="text"
+        class="form-control messages__input"
+        placeholder="Введите сообщение"
+        ng-model="$ctrl.message"
+        ng-keypress="$ctrl.sendMessage($event)"
+        uib-typeahead="command for command in $ctrl.commands | filter:$viewValue"
+        typeahead-popup-template-url="/src/chat/components/messages/dropdown-popup.html"
+      >
   </div>
 </div>
