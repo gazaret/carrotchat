@@ -7,10 +7,6 @@
     "build": "webpack --mode production",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@bitbucket.org/Gazaret/carrotchat.git"
-  },
   "author": "Nikolay Polukhin <polu-hin@mail.ru>",
   "license": "MIT",
   "homepage": "https://bitbucket.org/Gazaret/carrotchat#readme",
