@@ -50,7 +50,6 @@ export default class MessagesService {
    * Отключение пользователя от чата
    */
   disconnect() {
-    console.log('here');
     if (this.ws) {
       this.ws.close();
     }

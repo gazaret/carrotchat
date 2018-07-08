@@ -21,6 +21,8 @@ ConfigModule.config($httpProvider => {
           const AuthService = $injector.get('AuthService');
           AuthService.logout();
         }
+
+        return rejection;
       },
     };
   });
