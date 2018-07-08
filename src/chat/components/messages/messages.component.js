@@ -14,7 +14,6 @@ class MessagesController {
     this.getCommands();
 
     $rootScope.$on('chat_message', (event, messageData) => {
-      console.info('receive messge', messageData);
       this.messages.push(messageData);
       $scope.$apply();
     })

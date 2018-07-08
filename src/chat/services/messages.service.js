@@ -1,12 +1,25 @@
 export default class MessagesService {
   constructor(WEBSOCKET_ENDPOINT, API_ENDPOINT, $http, AuthService, $rootScope) {
+    this.WEBSOCKET_ENDPOINT = WEBSOCKET_ENDPOINT;
     this.API_ENDPOINT = API_ENDPOINT;
     this.$http = $http;
+    this.AuthService = AuthService;
+    this.$rootScope = $rootScope;
 
-    const token = AuthService.getToken();
+    this.ws = null;
+
+    // При событии logout отключим пользователя от сокетов
+    $rootScope.$on('logout', () => this.disconnect());
+  }
+
+  /**
+   * Инициализация сокетов
+   */
+  init() {
+    const token = this.AuthService.getToken();
 
     // К сожалению на клиенте нельзя менять хедеры в ws запросе, поэтому токен передаем через query параметр
-    this.ws = new WebSocket(`${WEBSOCKET_ENDPOINT}/ws/chat/?token=${token}`);
+    this.ws = new WebSocket(`${this.WEBSOCKET_ENDPOINT}/ws/chat/?token=${token}`);
 
     this.ws.onerror = (error) => {
       console.info('WebSocket error:', error);
@@ -15,7 +28,7 @@ export default class MessagesService {
     this.ws.onclose = (message) => {
       // При ошибке авторизации сделаем logout
       if (message.code === 1006) {
-        AuthService.logout();
+        this.AuthService.logout();
       }
     }
 
@@ -23,11 +36,8 @@ export default class MessagesService {
       const messageData = JSON.parse(message.data);
 
       // Сообщаем компоненту о получении нового сообщения
-      $rootScope.$emit('chat_message', messageData);
+      this.$rootScope.$emit('chat_message', messageData);
     }
-
-    // При событии logout отключим пользователя от сокетов
-    $rootScope.$on('logout', () => this.disconnect());
   }
 
   /**

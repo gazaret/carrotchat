@@ -14,6 +14,7 @@ class SignUpController {
       return;
     }
 
+    // Почему проверяем каждое поле? Потому что safari не понимает аттрибут required :(
     if (!this.username || !this.password || !this.confirmPassword || this.password !== this.confirmPassword) {
       return;
     }
