@@ -9,7 +9,11 @@ class SignUpController {
     this.errorMessage = '';
   }
 
-  async registration() {
+  async registration(event) {
+    if (event && event.keyCode !== 13) {
+      return;
+    }
+
     if (!this.username || !this.password || !this.confirmPassword || this.password !== this.confirmPassword) {
       return;
     }

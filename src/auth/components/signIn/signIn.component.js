@@ -9,7 +9,11 @@ class SignInController {
     this.errorMessage = '';
   }
 
-  async login() {
+  async login(event) {
+    if (event && event.keyCode !== 13) {
+      return;
+    }
+
     if (!this.username || !this.password) {
       return;
     }

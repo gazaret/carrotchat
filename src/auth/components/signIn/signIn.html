@@ -2,11 +2,11 @@
     <div class="signIn__card">
         <div class="form-group">
             <label for="username">Логин</label>
-            <input type="text" class="form-control" id="username" ng-model="$ctrl.username" placeholder="Введите логин">
+            <input type="text" class="form-control" id="username" ng-model="$ctrl.username" placeholder="Введите логин" required>
         </div>
         <div class="form-group">
             <label for="password">Пароль</label>
-            <input type="password" class="form-control" id="password" ng-model="$ctrl.password" placeholder="Введите пароль">
+            <input type="password" class="form-control" id="password" ng-model="$ctrl.password" placeholder="Введите пароль" ng-keypress="$ctrl.login($event)" required>
         </div>
         <small class="signIn__errorMessage form-text">{{ $ctrl.errorMessage }}</small>
         <button type="submit" class="btn btn-primary" ng-click="$ctrl.login()">Войти</button>
