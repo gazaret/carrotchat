@@ -17,10 +17,6 @@ class MessagesController {
       this.messages.push(messageData);
       $scope.$apply();
     })
-
-    $scope.$watch('$ctrl.message', (current) => {
-
-    })
   }
 
   sendMessage(event) {
